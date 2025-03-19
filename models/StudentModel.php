@@ -28,7 +28,7 @@ class StudentModel {
     }
 
     public function updateStudent($MaSV, $HoTen, $GioiTinh, $NgaySinh, $Hinh, $MaNganh) {
-        $sql = "UPDATE SinhVien SET HoTen = ?, GioiTinh = ?, NgaySinh = ?, Hinh = ?, MaNganh = ? WHERE MaSV = ?";
+        $sql = "UPDATE sinhvien SET HoTen = ?, GioiTinh = ?, NgaySinh = ?, Hinh = ?, MaNganh = ? WHERE MaSV = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("ssssss", $HoTen, $GioiTinh, $NgaySinh, $Hinh, $MaNganh, $MaSV);
         return $stmt->execute();
@@ -43,11 +43,24 @@ class StudentModel {
     }
 
     public function getStudentByMaSV($MaSV) {
-        $sql = "SELECT * FROM SinhVien WHERE MaSV = ?";
+        $sql = "SELECT * FROM sinhvien WHERE MaSV = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("s", $MaSV);
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
+    }
+
+    public function getAllMajors() {
+        $sql = "SELECT * FROM nganhhoc"; // Adjust the table name as needed
+        $result = $this->conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function insertStudent($MaSV, $HoTen, $GioiTinh, $NgaySinh, $Hinh, $MaNganh) {
+        $sql = "INSERT INTO sinhvien (MaSV, HoTen, GioiTinh, NgaySinh, Hinh, MaNganh) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ssssss", $MaSV, $HoTen, $GioiTinh, $NgaySinh, $Hinh, $MaNganh);
+        return $stmt->execute();
     }
 }
 ?>

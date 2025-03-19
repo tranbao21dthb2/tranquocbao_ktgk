@@ -27,4 +27,12 @@ class CourseController {
     public function unregisterAllCourses($MaSV) {
         return $this->model->unregisterAllCourses($MaSV);
     }
+
+    public function getRegisteredCoursesCount($MaSV) {
+        return $this->model->getRegisteredCoursesCount($MaSV);
+    }
+
+    public function getTotalCredits($MaSV) {
+        return $this->model->getTotalCredits($MaSV);
+    }
 } 

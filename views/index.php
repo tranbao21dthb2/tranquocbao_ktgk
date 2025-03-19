@@ -20,6 +20,7 @@ $students = $controller->index();
 </head>
 <body>
     <div class="container mt-4">
+    <a href="logout.php" class="btn btn-secondary mt-3">Đăng Xuất</a>
         <h1 class="mb-4">Danh Sách Sinh Viên</h1>
         <a href="create.php" class="btn btn-primary mb-3">Thêm Sinh Viên</a>
         <table class="table table-bordered">

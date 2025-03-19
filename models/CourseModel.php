@@ -63,4 +63,27 @@ class CourseModel {
         $stmt->bind_param("s", $MaSV);
         return $stmt->execute();
     }
+
+    public function getRegisteredCoursesCount($MaSV) {
+        $sql = "SELECT COUNT(*) as count FROM chitietdangky
+                JOIN dangky ON chitietdangky.MaDK = dangky.MaDK
+                WHERE dangky.MaSV = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $MaSV);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc()['count'];
+    }
+
+    public function getTotalCredits($MaSV) {
+        $sql = "SELECT SUM(HocPhan.SoTinChi) as totalCredits FROM chitietdangky
+                JOIN dangky ON chitietdangky.MaDK = dangky.MaDK
+                JOIN HocPhan ON chitietdangky.MaHP = HocPhan.MaHP
+                WHERE dangky.MaSV = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $MaSV);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc()['totalCredits'];
+    }
 } 

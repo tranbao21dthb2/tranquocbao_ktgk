@@ -109,5 +109,17 @@ class StudentController {
     public function getStudentByMaSV($MaSV) {
         return $this->model->getStudentByMaSV($MaSV);
     }
+
+    public function getAllMajors() {
+        return $this->model->getAllMajors();
+    }
+
+    public function updateStudent($MaSV, $HoTen, $GioiTinh, $NgaySinh, $Hinh, $MaNganh) {
+        return $this->model->updateStudent($MaSV, $HoTen, $GioiTinh, $NgaySinh, $Hinh, $MaNganh);
+    }
+
+    public function createStudent($MaSV, $HoTen, $GioiTinh, $NgaySinh, $Hinh, $MaNganh) {
+        return $this->model->insertStudent($MaSV, $HoTen, $GioiTinh, $NgaySinh, $Hinh, $MaNganh);
+    }
 }
 ?>

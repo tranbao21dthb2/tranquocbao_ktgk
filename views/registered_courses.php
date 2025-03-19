@@ -10,6 +10,8 @@ if (!isset($_SESSION['MaSV'])) {
 $MaSV = $_SESSION['MaSV'];
 $courseController = new CourseController();
 $registeredCourses = $courseController->getRegisteredCourses($MaSV);
+$registeredCount = $courseController->getRegisteredCoursesCount($MaSV);
+$totalCredits = $courseController->getTotalCredits($MaSV);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['delete_selected'])) {
@@ -38,6 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container mt-4">
         <h1 class="mb-4">Học Phần Đã Đăng Ký</h1>
+        
+        <div class="alert alert-info">
+            <strong>Số lượng học phần đã đăng ký:</strong> <?= $registeredCount ?> <br>
+            <strong>Tổng số tín chỉ:</strong> <?= $totalCredits ?>
+        </div>
 
         <?php if (isset($successMessage)): ?>
             <div class="alert alert-success"><?= htmlspecialchars($successMessage) ?></div>
